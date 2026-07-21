@@ -1,0 +1,135 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Tue Jul 21 12:58:19 2026
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: A055@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> create table employee(
+  2  empid number(10),
+  3  emp_name varchar(250),
+  4  gender char,
+  5  DOB date
+  6  );
+
+Table created.
+
+SQL> desc employee
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                              NUMBER(10)
+ EMP_NAME                                           VARCHAR2(250)
+ GENDER                                             CHAR(1)
+ DOB                                                DATE
+
+SQL> create table emp1 as select*from emp;
+create table emp1 as select*from emp
+                                 *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create table emp1 as select * from emp;
+create table emp1 as select * from emp
+                                   *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create table employee1 as select * from employee;
+
+Table created.
+
+SQL> desc employee1
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                              NUMBER(10)
+ EMP_NAME                                           VARCHAR2(250)
+ GENDER                                             CHAR(1)
+ DOB                                                DATE
+
+SQL> create table employee1 as select empid,emp_name from employee;
+create table employee1 as select empid,emp_name from employee
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> insert into employee values( 101,'bhuvana','f','17may2006');
+
+1 row created.
+
+SQL> select * from employee;
+
+     EMPID
+----------
+EMP_NAME
+--------------------------------------------------------------------------------
+G DOB
+- ---------
+       101
+bhuvana
+f 17-MAY-06
+
+
+SQL> insert into employee values( 102,'charan','m','28march2017');
+
+1 row created.
+
+SQL> select * from employee;
+
+     EMPID
+----------
+EMP_NAME
+--------------------------------------------------------------------------------
+G DOB
+- ---------
+       101
+bhuvana
+f 17-MAY-06
+
+       102
+charan
+m 28-MAR-17
+
+     EMPID
+----------
+EMP_NAME
+--------------------------------------------------------------------------------
+G DOB
+- ---------
+
+
+SQL> create table employee4 as select EMPID from employee where 2>3;
+
+Table created.
+
+SQL> select * from employee4;
+
+no rows selected
+
+SQL> insert into employee(&EMPID,&EMP_NAME,&GENDER);
+Enter value for empid: 12
+Enter value for emp_name: bhuvana
+Enter value for gender: f
+old   1: insert into employee(&EMPID,&EMP_NAME,&GENDER)
+new   1: insert into employee(12,bhuvana,f)
+insert into employee(12,bhuvana,f)
+                     *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> SELECT
+  2  COUNT(*)
+  3  FROM employee;
+
+  COUNT(*)
+----------
+         2
+
+SQL>
