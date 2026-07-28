@@ -1,0 +1,233 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Tue Jul 28 13:18:21 2026
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: A055@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> create table Employee(
+  2  Empno Number(4) Constraint Emp_pkeyPrimary key,
+  3  Ename Varchar2(20),
+  4
+SQL> create table student(
+  2  regno Varchar(20)
+  3  Name char(10)
+  4
+SQL> create table student(
+  2  regno Varchar(20),
+  3  Name char(10),
+  4  Year Number(5),
+  5  course char(10));
+
+Table created.
+
+SQL> desc student
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              VARCHAR2(20)
+ NAME                                               CHAR(10)
+ YEAR                                               NUMBER(5)
+ COURSE                                             CHAR(10)
+
+SQL> create Table student1 as select * from student;
+
+Table created.
+
+SQL> desc student1
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              VARCHAR2(20)
+ NAME                                               CHAR(10)
+ YEAR                                               NUMBER(5)
+ COURSE                                             CHAR(10)
+
+SQL> create table student2 as select regno,name,year,course from student;
+
+Table created.
+
+SQL> desc student2
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              VARCHAR2(20)
+ NAME                                               CHAR(10)
+ YEAR                                               NUMBER(5)
+ COURSE                                             CHAR(10)
+
+SQL> insert into student values(55,'bhuvana',3,'cse');
+
+1 row created.
+
+SQL> select * from student;
+
+REGNO                NAME             YEAR COURSE
+-------------------- ---------- ---------- ----------
+55                   bhuvana             3 cse
+
+SQL> create table student3 as select * from student where 1>2;
+
+Table created.
+
+SQL> desc student3
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              VARCHAR2(20)
+ NAME                                               CHAR(10)
+ YEAR                                               NUMBER(5)
+ COURSE                                             CHAR(10)
+
+SQL> create table student4 as select * from student;
+
+Table created.
+
+SQL> select * from student4
+  2
+SQL> select * from student4;
+
+REGNO                NAME             YEAR COURSE
+-------------------- ---------- ---------- ----------
+55                   bhuvana             3 cse
+
+SQL> create table student as select regno,name,year,course from student where 1>2;
+create table student as select regno,name,year,course from student where 1>2
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table student5 as select regno,name,year,course from student where 1>2;
+
+Table created.
+
+SQL> select *from student5;
+
+no rows selected
+
+SQL> create table student6 as select regno,name,year,course from student;
+
+Table created.
+
+SQL> select * from student6;
+
+REGNO                NAME             YEAR COURSE
+-------------------- ---------- ---------- ----------
+55                   bhuvana             3 cse
+
+SQL> alter table student modify name Varchar2(20);
+
+Table altered.
+
+SQL> alter table student6 rename to student7;
+
+Table altered.
+
+SQL> insert into student values(12,'charan',3,'cse');
+
+1 row created.
+
+SQL> select * from student;
+
+REGNO                NAME                       YEAR COURSE
+-------------------- -------------------- ---------- ----------
+55                   bhuvana                       3 cse
+12                   charan                        3 cse
+
+SQL> insert into student5 values(&regno,'&name',&year);
+Enter value for regno: 55
+Enter value for name: bhuvana
+Enter value for year: 3
+old   1: insert into student5 values(&regno,'&name',&year)
+new   1: insert into student5 values(55,'bhuvana',3)
+insert into student5 values(55,'bhuvana',3)
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into student5 values(&regno,'&name',&year&,&Course);
+Enter value for regno: 55
+Enter value for name: bhuvana
+Enter value for year: 3
+Enter value for course: cse
+old   1: insert into student5 values(&regno,'&name',&year&,&Course)
+new   1: insert into student5 values(55,'bhuvana',3&,cse)
+insert into student5 values(55,'bhuvana',3&,cse)
+                                          *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into student5 values(&regno,'&name',&year,&Course);
+Enter value for regno: 55
+Enter value for name: bhuvana
+Enter value for year: 3
+Enter value for course: cse
+old   1: insert into student5 values(&regno,'&name',&year,&Course)
+new   1: insert into student5 values(55,'bhuvana',3,cse)
+insert into student5 values(55,'bhuvana',3,cse)
+                                           *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into studen5 values(&regno,'&name',&year,'&Course');
+Enter value for regno: 12
+Enter value for name: charan
+Enter value for year: 3
+Enter value for course: cse
+old   1: insert into studen5 values(&regno,'&name',&year,'&Course')
+new   1: insert into studen5 values(12,'charan',3,'cse')
+insert into studen5 values(12,'charan',3,'cse')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into student7(regno,name,year,course)select regno,name,year,course from student;
+
+2 rows created.
+
+SQL> select * from student7;
+
+REGNO                NAME             YEAR COURSE
+-------------------- ---------- ---------- ----------
+55                   bhuvana             3 cse
+55                   bhuvana             3 cse
+12                   charan              3 cse
+
+SQL> select * from student7;
+
+REGNO                NAME             YEAR COURSE
+-------------------- ---------- ---------- ----------
+55                   bhuvana             3 cse
+55                   bhuvana             3 cse
+12                   charan              3 cse
+
+SQL> update student7 set regno=12 where course=ee
+  2  update student7 set regno=12 where course=ee
+  3
+SQL> update student7 set regno=12 where course=cse
+  2
+SQL> drop table student6;
+drop table student6
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> drop table student6
+  2  drop table student6;
+drop table student6
+*
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> drop table student5;
+
+Table dropped.
+
+SQL>
