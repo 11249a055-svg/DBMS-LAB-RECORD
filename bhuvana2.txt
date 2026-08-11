@@ -1,0 +1,61 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Tue Aug 11 12:56:58 2026
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: A055@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> desc course5;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                 NOT NULL NUMBER(10)
+ COURSE_NAME                                        CHAR(5)
+
+SQL> desc student6;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                    NOT NULL VARCHAR2(5)
+ NAME                                      NOT NULL VARCHAR2(20)
+ COURSE_ID                                          NUMBER(5)
+ EMAIL                                              VARCHAR2(30)
+ GENDER                                             CHAR(6)
+ AGE                                                NUMBER(3)
+
+SQL> alter table student6 and constraint student_fk foreign key(course_id) references course5(course_id);
+alter table student6 and constraint student_fk foreign key(course_id) references course5(course_id)
+                     *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table student6 add constraint student_fk foreign key(course_id) references course5(course_id);
+
+Table altered.
+
+SQL> alter table student6 add constraint student_un unique(email);
+
+Table altered.
+
+SQL> alter table student6 modify gender default 'f';
+
+Table altered.
+
+SQL> alter table student6 add constraint student_chk check(age>17 and age<18);
+
+Table altered.
+
+SQL> desc student6;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                    NOT NULL VARCHAR2(5)
+ NAME                                      NOT NULL VARCHAR2(20)
+ COURSE_ID                                          NUMBER(5)
+ EMAIL                                              VARCHAR2(30)
+ GENDER                                             CHAR(6)
+ AGE                                                NUMBER(3)
+
+SQL>
