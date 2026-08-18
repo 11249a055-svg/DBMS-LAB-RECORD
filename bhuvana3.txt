@@ -1,0 +1,165 @@
+SQL*Plus: Release 11.2.0.1.0 Production on Tue Aug 18 13:29:26 2026
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: A055@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> desc student6
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                    NOT NULL VARCHAR2(5)
+ NAME                                      NOT NULL VARCHAR2(20)
+ COURSE_ID                                          NUMBER(5)
+ EMAIL                                              VARCHAR2(30)
+ GENDER                                             CHAR(6)
+ AGE                                                NUMBER(3)
+
+SQL> desc course5
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                 NOT NULL NUMBER(10)
+ COURSE_NAME                                        CHAR(5)
+
+SQL> create table student6(
+  2  regno number(10),
+  3  name varchar(15),
+  4  year number(3),
+  5  course_id varchar(11)
+  6  );
+create table student6(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table student7(
+  2  regno number(10),
+  3  name varchar(15),
+  4  year number(3),
+  5  course_id varchar(11)
+  6  );
+create table student7(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table student45(
+  2  regno number(10),
+  3  name varchar(15),
+  4  year number(3),
+  5  course_id varchar(11)
+  6  );
+
+Table created.
+
+SQL> desc student45;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              NUMBER(10)
+ NAME                                               VARCHAR2(15)
+ YEAR                                               NUMBER(3)
+ COURSE_ID                                          VARCHAR2(11)
+
+SQL> desc course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                 NOT NULL NUMBER(10)
+ COURSE_NAME                               NOT NULL VARCHAR2(30)
+ DURATION                                           VARCHAR2(20)
+
+SQL> insert into student45 values(55,'bhuvnaa',1,'101');
+
+1 row created.
+
+SQL> insert into student45 values(62,'charan',3,'102');
+
+1 row created.
+
+SQL> insert into student45 values(72,'bhanu',3,'103');
+
+1 row created.
+
+SQL> insert into student45 values(73,'siva',3,'104');
+
+1 row created.
+
+SQL> select * from student45;
+
+     REGNO NAME                  YEAR COURSE_ID
+---------- --------------- ---------- -----------
+        55 bhuvnaa                  1 101
+        62 charan                   3 102
+        72 bhanu                    3 103
+        73 siva                     3 104
+
+SQL> insert into course values(101,'cse','1 year');
+
+1 row created.
+
+SQL> insert into course values(102,'ece','2 year');
+
+1 row created.
+
+SQL> insert into course values(103,'eee','3 years');
+
+1 row created.
+
+SQL> insert into course values(104,'mech','3 years');
+
+1 row created.
+
+SQL> select * from course;
+
+ COURSE_ID COURSE_NAME                    DURATION
+---------- ------------------------------ --------------------
+       101 cse                            1 year
+       102 ece                            2 year
+       103 eee                            3 years
+       104 mech                           3 years
+
+SQL> select regno,name,course_name loc from student45,course;
+
+     REGNO NAME            LOC
+---------- --------------- ------------------------------
+        55 bhuvnaa         cse
+        62 charan          cse
+        72 bhanu           cse
+        73 siva            cse
+        55 bhuvnaa         ece
+        62 charan          ece
+        72 bhanu           ece
+        73 siva            ece
+        55 bhuvnaa         eee
+        62 charan          eee
+        72 bhanu           eee
+
+     REGNO NAME            LOC
+---------- --------------- ------------------------------
+        73 siva            eee
+        55 bhuvnaa         mech
+        62 charan          mech
+        72 bhanu           mech
+        73 siva            mech
+
+16 rows selected.
+
+SQL> select regno,name,course.course_id loc from student45,course where student45.course_id=course.course_id;
+
+     REGNO NAME                   LOC
+---------- --------------- ----------
+        55 bhuvnaa                101
+        62 charan                 102
+        72 bhanu                  103
+        73 siva                   104
+
+SQL>
+
+
+
+
+
