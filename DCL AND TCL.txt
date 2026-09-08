@@ -1,0 +1,279 @@
+SQL> CREATE TABLE EMPLOYEE70(
+  2  EMP_ID NUMBER(5) PRIMARY KEY,
+  3   EMP_NAME VARCHAR2(30),
+  4   SALARY NUMBER(8)
+  5  );
+
+Table created.
+
+SQL> insert into employee70 values (101,'bhuvana',670000);
+
+1 row created.
+
+SQL> insert into employee70 values (102,'pavi',5000);
+
+1 row created.
+
+SQL> grant select on employee70 to scott;
+
+Grant succeeded.
+
+SQL> grant select, insert, update on employee70 to scott;
+
+Grant succeeded.
+
+SQL> revoke insert on employee70 from scott;
+
+Revoke succeeded.
+
+SQL> insert into employee70 values (103,'bhanu',70000);
+
+1 row created.
+
+SQL> insert into employee70 values (104,'siva',89000);
+
+1 row created.
+
+SQL> savepoint sp1;
+
+Savepoint created.
+
+SQL> insert into employee70 values (105,'kani',3000);
+
+1 row created.
+
+SQL> rollback to sp1;
+
+Rollback complete.
+
+SQL> select * from employee70;
+
+    EMP_ID EMP_NAME                           SALARY
+---------- ------------------------------ ----------
+       101 bhuvana                            670000
+       102 pavi                                 5000
+       103 bhanu                               70000
+       104 siva                                89000
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL> CREATE TABLE EMPLOYEE70(
+  2  EMP_ID NUMBER(5) PRIMARY KEY,
+  3   EMP_NAME VARCHAR2(30),
+  4   SALARY NUMBER(8)
+  5  );
+
+Table created.
+
+SQL> insert into employee70 values (101,'bhuvana',670000);
+
+1 row created.
+
+SQL> insert into employee70 values (102,'pavi',5000);
+
+1 row created.
+
+SQL> grant select on employee70 to scott;
+
+Grant succeeded.
+
+SQL> grant select, insert, update on employee70 to scott;
+
+Grant succeeded.
+
+SQL> revoke insert on employee70 from scott;
+
+Revoke succeeded.
+
+SQL> insert into employee70 values (103,'bhanu',70000);
+
+1 row created.
+
+SQL> insert into employee70 values (104,'siva',89000);
+
+1 row created.
+
+SQL> savepoint sp1;
+
+Savepoint created.
+
+SQL> insert into employee70 values (105,'kani',3000);
+
+1 row created.
+
+SQL> rollback to sp1;
+
+Rollback complete.
+
+SQL> select * from employee70;
+
+    EMP_ID EMP_NAME                           SALARY
+---------- ------------------------------ ----------
+       101 bhuvana                            670000
+       102 pavi                                 5000
+       103 bhanu                               70000
+       104 siva                                89000
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL> CREATE TABLE EMPLOYEE70(
+  2  EMP_ID NUMBER(5) PRIMARY KEY,
+  3   EMP_NAME VARCHAR2(30),
+  4   SALARY NUMBER(8)
+  5  );
+
+Table created.
+
+SQL> insert into employee70 values (101,'bhuvana',670000);
+
+1 row created.
+
+SQL> insert into employee70 values (102,'pavi',5000);
+
+1 row created.
+
+SQL> grant select on employee70 to scott;
+
+Grant succeeded.
+
+SQL> grant select, insert, update on employee70 to scott;
+
+Grant succeeded.
+
+SQL> revoke insert on employee70 from scott;
+
+Revoke succeeded.
+
+SQL> insert into employee70 values (103,'bhanu',70000);
+
+1 row created.
+
+SQL> insert into employee70 values (104,'siva',89000);
+
+1 row created.
+
+SQL> savepoint sp1;
+
+Savepoint created.
+
+SQL> insert into employee70 values (105,'kani',3000);
+
+1 row created.
+
+SQL> rollback to sp1;
+
+Rollback complete.
+
+SQL> select * from employee70;
+
+    EMP_ID EMP_NAME                           SALARY
+---------- ------------------------------ ----------
+       101 bhuvana                            670000
+       102 pavi                                 5000
+       103 bhanu                               70000
+       104 siva                                89000
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
+
