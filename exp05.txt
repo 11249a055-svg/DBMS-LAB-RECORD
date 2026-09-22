@@ -1,0 +1,163 @@
+SQL> CREATE TABLE STUDENT79(
+  2  STUDENT_ID NUMBER(5) PRIMARY KEY,
+  3  STUDENT_NAME VARCHAR2(30),
+  4  DEPARTMENT VARCHAR2(20),
+  5  MARKS NUMBER(3)
+  6  );
+
+Table created.
+
+SQL> insert into student79 values (101,'bhuvana','ece',85);
+
+1 row created.
+
+SQL> insert into student79 values (102,'charan','ece',78);
+
+1 row created.
+
+SQL> insert into student79 values (103,'siva','ece',67);
+
+1 row created.
+
+SQL> insert into student79 values (104,'bhanu','ece',85);
+
+1 row created.
+
+SQL> select * from student79;
+
+STUDENT_ID STUDENT_NAME                   DEPARTMENT                MARKS
+---------- ------------------------------ -------------------- ----------
+       101 bhuvana                        ece                          85
+       102 charan                         ece                          78
+       103 siva                           ece                          67
+       104 bhanu                          ece                          85
+
+SQL> CREATE TABLE ALUMNI
+  2  (
+  3  STUDENT_NAME VARCHAR2(30)
+  4  );
+
+Table created.
+
+SQL> INSERT INTO ALUMNI VALUES('ARUN');
+
+1 row created.
+
+SQL> INSERT INTO ALUMNI VALUES('RAVI');
+
+1 row created.
+
+SQL> INSERT INTO ALUMNI VALUES('KAVI');
+
+1 row created.
+
+SQL> SELECT *
+  2  FROM STUDENT
+  3  WHERE DEPARTMENT IN ('CSE','IT');
+WHERE DEPARTMENT IN ('CSE','IT')
+      *
+ERROR at line 3:
+ORA-00904: "DEPARTMENT": invalid identifier
+
+
+SQL> select * from student79 where department in ('cse','it');
+
+no rows selected
+
+SQL> select*
+  2  from student79
+  3  where department in ('cse;,'it');
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> select*
+  2  from student79
+  3  where department in ('cse','it');
+
+no rows selected
+
+SQL> select*
+  2  from STUDENT79
+  3  where department in ('cse','it');
+
+no rows selected
+
+SQL> SELECT*
+  2  FROM STUDENT79
+  3  WHERE DEPARTMENT IN ('CSE','IT');
+
+no rows selected
+
+SQL> SELECT*
+  2  from STUDENT79
+  3  where department in ('ece');
+
+STUDENT_ID STUDENT_NAME                   DEPARTMENT                MARKS
+---------- ------------------------------ -------------------- ----------
+       101 bhuvana                        ece                          85
+       102 charan                         ece                          78
+       103 siva                           ece                          67
+       104 bhanu                          ece                          85
+
+SQL> select * from student where marks > any
+  2
+SQL> select *
+  2  from student
+  3  where marks > any
+  4  (
+  5  select marks
+  6  from student
+  7  where department = 'ece'
+  8  );
+where marks > any
+      *
+ERROR at line 3:
+ORA-00904: "MARKS": invalid identifier
+
+
+SQL> select *
+  2  from STUDENT79
+  3  where marks > any
+  4  (
+  5  select marks
+  6  from student79
+  7  where department = 'ece'
+  8  );
+
+STUDENT_ID STUDENT_NAME                   DEPARTMENT                MARKS
+---------- ------------------------------ -------------------- ----------
+       101 bhuvana                        ece                          85
+       104 bhanu                          ece                          85
+       102 charan                         ece                          78
+
+SQL> select *
+  2  from STUDENT79
+  3  where  marks > all
+  4  (
+  5  select marks
+  6  from student79
+  7  where department = 'ece'
+  8  );
+
+no rows selected
+
+SQL> select *
+  2  from STUDENT79
+  3  where marks > ALL
+  4  (
+  5  select marks
+  6  from student79
+  7  where department = 'ece'
+  8  );
+
+no rows selected
+
+SQL> select student_name
+  2  from student s
+  3  where exists
+  4  (
+  5  select *
+  6  from alumni a
+  7  where a.student79_name = s.student79_name
+  8  );
